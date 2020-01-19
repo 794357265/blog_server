@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
-* @auther zhangyibing  zhangyibing@bmsoft.com.cn
+* @author zhangyibing  zhangyibing@bmsoft.com.cn
 * @Date 2019/11/20
 * @desription 
 **/
@@ -21,6 +21,12 @@ public class IndexController {
 //            throw new NotFoundException("博客不存在");
 //        }
         System.out.println("-----index------");
+        return "index";
+    }
+
+    @GetMapping("/")
+    public String index2(){
+        System.out.println("-----index2------");
         return "index";
     }
 

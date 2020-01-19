@@ -3,6 +3,9 @@ package cn.com.zyb;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * @author zyb
+ */
 @SpringBootApplication
 public class BlogServerApplication {
 
