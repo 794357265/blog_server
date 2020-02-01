@@ -1,7 +1,9 @@
 package cn.com.zyb.po;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
 * @auther zhangyibing  zhangyibing@bmsoft.com.cn
@@ -66,6 +68,31 @@ public class Blog {
      */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+
+    /**
+     * 类型
+     */
+    @ManyToOne
+    private Type type;
+
+    /**
+     * 标签列表
+     * cascade = {CascadeType.PERSIST}  --级联新增，新增博客顺带新增tag
+     */
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    private List<Tag> tags = new ArrayList<>();
+
+    /**
+     * 博客所属用户
+     */
+    @ManyToOne
+    private User user;
+
+    /**
+     * 博客下的评论列表
+     */
+    @OneToMany(mappedBy = "blog")
+    private List<Comment> comments = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -169,6 +196,38 @@ public class Blog {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

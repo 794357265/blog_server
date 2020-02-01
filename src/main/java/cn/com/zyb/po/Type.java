@@ -1,9 +1,8 @@
 package cn.com.zyb.po;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 * @auther zhangyibing  zhangyibing@bmsoft.com.cn
@@ -22,6 +21,12 @@ public class Type {
      */
     private String name;
 
+    /**
+     *  类型下所属的博客列表
+     */
+    @OneToMany(mappedBy = "type")
+    private List<Blog> blogs = new ArrayList<>();
+
     public Long getId() {
         return id;
     }
@@ -36,6 +41,14 @@ public class Type {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

@@ -1,10 +1,9 @@
 package cn.com.zyb.po;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "t_user")
@@ -40,11 +39,19 @@ public class User {
     /**
      *创建时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
     /**
      *更新时间
      */
+    @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+
+    /**
+     * 用户下的博客列表
+     */
+    @OneToMany(mappedBy = "user")
+    private List<Blog> blogs = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -116,6 +123,14 @@ public class User {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public List<Blog> getBlogs() {
+        return blogs;
+    }
+
+    public void setBlogs(List<Blog> blogs) {
+        this.blogs = blogs;
     }
 
     @Override

@@ -1,8 +1,12 @@
 package cn.com.zyb.web;
 
+import cn.com.zyb.po.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
 * @author zhangyibing  zhangyibing@bmsoft.com.cn
@@ -13,14 +17,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class IndexController {
 
     @GetMapping("/")
-    public String index2(){
+    public String index2(HttpSession session){
         System.out.println("-----index2------");
-        return "index";
+        User user = new User();
+        user.setAvatar("xxx");
+        user.setNickName("zyb");
+
+        session.setAttribute("user", user);
+
+        return "admin/index";
     }
     @GetMapping("/blog")
     public String blog(){
         System.out.println("-----blog------");
-        return "blog";
+        return "admin/login";
     }
 
     @GetMapping("/type")

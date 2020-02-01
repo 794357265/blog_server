@@ -5,6 +5,13 @@
     <title>错误</title>
 </head>
 <body>
+    <!--导航-->
+    <nav th:replace="_fragments :: menu(1)" >
+    </nav>
+
+
+    <br><br>
+    <br><br>
     <h1>错误</h1>
 
     <div>
@@ -16,5 +23,12 @@
         </ul>
         <div th:utext="'--&gt;'" th:remove="tag"></div>
     </div>
+
+
+    <br><br>
+    <br><br>
+
+    <!--底部-->
+    <footer th:replace="_fragments :: footer">
 </body>
 </html>
