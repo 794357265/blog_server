@@ -18,14 +18,11 @@ public class IndexController {
 
     @GetMapping("/")
     public String index2(HttpSession session){
-        System.out.println("-----index2------");
         User user = new User();
         user.setAvatar("xxx");
         user.setNickName("zyb");
-
         session.setAttribute("user", user);
-
-        return "admin/index";
+        return "index";
     }
     @GetMapping("/blog")
     public String blog(){
