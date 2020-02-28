@@ -5,6 +5,7 @@ import cn.com.zyb.dao.BlogRespsitory;
 import cn.com.zyb.po.Blog;
 import cn.com.zyb.po.Type;
 import cn.com.zyb.service.BlogService;
+import cn.com.zyb.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,6 +18,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -31,7 +33,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public Page<Blog> listBlog(Pageable pageable, Blog blog) {
+    public Page<Blog> listBlog(Pageable pageable, BlogQuery blog) {
         return blogRespsitory.findAll(new Specification<Blog>() {
             @Override
             public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> cq, CriteriaBuilder cb) {
@@ -39,13 +41,13 @@ public class BlogServiceImpl implements BlogService {
                 if(!"".equals(blog.getTitle()) && blog.getTitle() != null){
                     predicates.add(cb.like(root.<String>get("title"), "%"+blog.getTitle()+"%"));
                 }
-                if( blog.getType() != null && blog.getType().getId() != null ){
-                    predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getType().getId()));
+                if( blog.getTypeId() != null){
+                    predicates.add(cb.equal(root.<Type>get("type").get("id"), blog.getTypeId()));
                 }
                 if( blog.isRecommend() ){
                     predicates.add(cb.equal(root.<Boolean>get("recommend"), blog.isRecommend()));
                 }
-                cq.where(predicates.toArray(new Predicate[predicates.size()]));
+                cq.where(predicates.toArray(new Predicate[0]));
                 return null;
             }
         }, pageable);
@@ -53,6 +55,9 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog saveBlog(Blog blog) {
+        blog.setCreateTime(new Date());
+        blog.setUpdateTime(new Date());
+        blog.setViews(0);
         return blogRespsitory.save(blog);
     }
 
