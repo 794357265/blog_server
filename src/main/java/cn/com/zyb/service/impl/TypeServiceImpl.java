@@ -49,4 +49,9 @@ public class TypeServiceImpl implements TypeService {
     public void deleteType(Long id) {
         typeRepository.delete(id);
     }
+
+    @Override
+    public Type getTypeByName(String name) {
+        return typeRepository.findByName(name);
+    }
 }

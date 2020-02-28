@@ -1,6 +1,9 @@
 package cn.com.zyb.po;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +22,7 @@ public class Type {
     /**
      * 类型名称
      */
+    @NotBlank(message = "分类名称不能为空")
     private String name;
 
     /**
