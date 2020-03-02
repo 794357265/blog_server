@@ -13,7 +13,7 @@ spring:
 logging:
   level:
     root: info
-    cn.com.zyb: debug
+    com.qianluohan: debug
   file:
     name: log/blog.log
 server:
