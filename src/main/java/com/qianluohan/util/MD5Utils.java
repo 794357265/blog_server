@@ -4,8 +4,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by limi on 2017/10/15.
- */
+* @auther zhangyibing  zhangyibing@bmsoft.com.cn
+* @Date 2019/11/20
+* @desription
+**/
 public class MD5Utils {
 
     /**

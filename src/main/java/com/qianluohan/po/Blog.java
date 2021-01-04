@@ -6,10 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
-* @auther zhangyibing  zhangyibing@bmsoft.com.cn
-* @Date 2020/1/27
-* @desription
-**/
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_blog")
 public class Blog {
@@ -18,86 +16,44 @@ public class Blog {
     @GeneratedValue
     private Long id;
 
-    /**
-     * 标题
-     */
+    private String title;
+
     @Basic(fetch = FetchType.LAZY)
     @Lob
-    private String title;
-    /**
-     * 内容
-     */
     private String content;
-    /**
-     * 首图
-     */
     private String firstPicture;
-    /**
-     * 标记（转载、原创。。。）
-     */
     private String flag;
-    /**
-     * 浏览次数
-     */
     private Integer views;
-    /**
-     * 是否开启赞赏
-     */
     private boolean appreciation;
-    /**
-     * 是否开启转载
-     */
     private boolean shareStatement;
-    /**
-     * 是否开启评论
-     */
     private boolean commentabled;
-    /**
-     * 是否发布
-     */
     private boolean published;
-    /**
-     * 是否推荐
-     */
     private boolean recommend;
-    /**
-     * 创建时间
-     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
-    /**
-     * 更新时间
-     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    /**
-     * 类型
-     */
     @ManyToOne
     private Type type;
 
-    /**
-     * 标签列表
-     * cascade = {CascadeType.PERSIST}  --级联新增，新增博客顺带新增tag
-     */
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
 
-    /**
-     * 博客所属用户
-     */
+
     @ManyToOne
     private User user;
 
-    /**
-     * 博客下的评论列表
-     */
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
 
     @Transient
     private String tagIds;
+
+    private String description;
+
+    public Blog() {
+    }
 
     public Long getId() {
         return id;
@@ -219,6 +175,7 @@ public class Blog {
         this.tags = tags;
     }
 
+
     public User getUser() {
         return user;
     }
@@ -226,6 +183,7 @@ public class Blog {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     public List<Comment> getComments() {
         return comments;
@@ -235,6 +193,7 @@ public class Blog {
         this.comments = comments;
     }
 
+
     public String getTagIds() {
         return tagIds;
     }
@@ -242,6 +201,38 @@ public class Blog {
     public void setTagIds(String tagIds) {
         this.tagIds = tagIds;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void init() {
+        this.tagIds = tagsToIds(this.getTags());
+    }
+
+    //1,2,3
+    private String tagsToIds(List<Tag> tags) {
+        if (!tags.isEmpty()) {
+            StringBuffer ids = new StringBuffer();
+            boolean flag = false;
+            for (Tag tag : tags) {
+                if (flag) {
+                    ids.append(",");
+                } else {
+                    flag = true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        } else {
+            return tagIds;
+        }
+    }
+
 
     @Override
     public String toString() {
@@ -259,6 +250,12 @@ public class Blog {
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tags=" + tags +
+                ", user=" + user +
+                ", comments=" + comments +
+                ", tagIds='" + tagIds + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }

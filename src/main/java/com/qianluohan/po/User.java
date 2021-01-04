@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_user")
 public class User {
@@ -12,46 +15,22 @@ public class User {
     @Id
     @GeneratedValue
     private Long id;
-    /**
-     *昵称
-     */
-    private String nickName;
-    /**
-     *用户名
-     */
+    private String nickname;
     private String username;
-    /**
-     *密码
-     */
     private String password;
-    /**
-     *邮箱
-     */
     private String email;
-    /**
-     *头像
-     */
     private String avatar;
-    /**
-     *类型
-     */
     private Integer type;
-    /**
-     *创建时间
-     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
-    /**
-     *更新时间
-     */
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
 
-    /**
-     * 用户下的博客列表
-     */
     @OneToMany(mappedBy = "user")
     private List<Blog> blogs = new ArrayList<>();
+
+    public User() {
+    }
 
     public Long getId() {
         return id;
@@ -61,12 +40,12 @@ public class User {
         this.id = id;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getUsername() {
@@ -125,6 +104,7 @@ public class User {
         this.updateTime = updateTime;
     }
 
+
     public List<Blog> getBlogs() {
         return blogs;
     }
@@ -137,7 +117,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", nickName='" + nickName + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

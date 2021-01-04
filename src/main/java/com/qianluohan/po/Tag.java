@@ -4,6 +4,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_tag")
 public class Tag {
@@ -11,17 +14,13 @@ public class Tag {
     @Id
     @GeneratedValue
     private Long id;
-
-    /**
-     * 标签名称
-     */
     private String name;
 
-    /**
-     * 标签对应的博客列表
-     */
     @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
+
+    public Tag() {
+    }
 
     public Long getId() {
         return id;

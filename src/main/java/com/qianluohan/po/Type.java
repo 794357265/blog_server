@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-* @auther zhangyibing  zhangyibing@bmsoft.com.cn
-* @Date 2020/1/27
-* @desription 类型实体
-**/
+ * Created by limi on 2017/10/14.
+ */
 @Entity
 @Table(name = "t_type")
 public class Type {
@@ -18,17 +16,14 @@ public class Type {
     @Id
     @GeneratedValue
     private Long id;
-    /**
-     * 类型名称
-     */
     @NotBlank(message = "分类名称不能为空")
     private String name;
 
-    /**
-     *  类型下所属的博客列表
-     */
     @OneToMany(mappedBy = "type")
     private List<Blog> blogs = new ArrayList<>();
+
+    public Type() {
+    }
 
     public Long getId() {
         return id;

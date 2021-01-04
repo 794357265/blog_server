@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
+/**
+ * Created by limi on 2017/10/16.
+ */
 public interface TypeService {
 
     Type saveType(Type type);
@@ -17,6 +20,8 @@ public interface TypeService {
     Page<Type> listType(Pageable pageable);
 
     List<Type> listType();
+
+    List<Type> listTypeTop(Integer size);
 
     Type updateType(Long id, Type type);
 

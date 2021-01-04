@@ -7,6 +7,11 @@ import com.qianluohan.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+* @auther zhangyibing  zhangyibing@bmsoft.com.cn
+* @Date 2019/11/20
+* @desription
+**/
 @Service
 public class UserServiceImpl implements UserService {
 
