@@ -27,6 +27,7 @@
         <div class="ui container ">
             <form id="blog-form" th:object="${blog}" action="#" th:action="@{/admin/blogs}" method="post" class="ui form">
                 <input type="hidden" name="published" th:value="*{published}">
+                <input type="hidden" name="id" th:value="*{id}">
                 <div class="required field">
                     <div class="ui left labeled input">
                         <div class="ui selection compact teal basic dropdown label">
@@ -39,7 +40,7 @@
                                 <div class="item" data-value="翻译">翻译</div>
                             </div>
                         </div>
-                        <input class="" type="text" name="title" placeholder="标题">
+                        <input class="" type="text" name="title" placeholder="标题" th:value="*{title}">
                     </div>
                 </div>
 
@@ -56,9 +57,9 @@
                             <div class="ui fluid selection dropdown">
                                 <input type="hidden" name="type">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">错误日志</div>
+                                <div class="default text">分类</div>
                                 <div class="menu">
-                                    <div th:each="type : ${types}" class="item" data-value="1" th:data-value="${type.id}" th:text="${type.name}">错误日志</div>
+                                    <div th:each="type : ${types}" class="item" th:data-value="${type.id}" th:text="${type.name}">分类</div>
                                 </div>
                             </div>
                         </div>
@@ -69,9 +70,9 @@
                             <div class="ui selection fluid multiple search  dropdown">
                                 <input type="hidden" name="tag">
                                 <i class="dropdown icon"></i>
-                                <div class="default text">Java</div>
+                                <div class="default text">标签</div>
                                 <div class="menu">
-                                    <div th:each="tag : ${tags}" class="item" data-value="1" th:data-value="${tag.id}" th:text="${tag.name}">错误日志</div>
+                                    <div th:each="tag : ${tags}" class="item" th:data-value="${tag.id}" th:text="${tag.name}">标签</div>
                                 </div>
                             </div>
                         </div>
