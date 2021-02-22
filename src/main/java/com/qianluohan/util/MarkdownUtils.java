@@ -11,6 +11,8 @@ import org.commonmark.renderer.html.AttributeProvider;
 import org.commonmark.renderer.html.AttributeProviderContext;
 import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
 
@@ -19,7 +21,10 @@ import java.util.*;
 * @Date 2021/1/7
 * @desription 
 **/
+@Component
 public class MarkdownUtils {
+
+    private static String picServerAddress;
 
     /**
      * markdown格式转换成HTML格式
@@ -40,6 +45,8 @@ public class MarkdownUtils {
      * @return
      */
     public static String markdownToHtmlExtensions(String markdown) {
+        String picServerAddress = getPicServerAddress();
+        markdown = markdown.replaceAll("@@picAddress@@", picServerAddress);
         //h标题生成id
         Set<Extension> headingAnchorExtensions = Collections.singleton(HeadingAnchorExtension.create());
         //转换table的HTML
@@ -76,14 +83,12 @@ public class MarkdownUtils {
         }
     }
 
+    public static String getPicServerAddress() {
+        return picServerAddress;
+    }
 
-    public static void main(String[] args) {
-        String table = "| hello | hi   | 哈哈哈   |\n" +
-                "| ----- | ---- | ----- |\n" +
-                "| 斯维尔多  | 士大夫  | f啊    |\n" +
-                "| 阿什顿发  | 非固定杆 | 撒阿什顿发 |\n" +
-                "\n";
-        String a = "[imCoding 爱编程](http://www.lirenmi.cn)";
-        System.out.println(markdownToHtmlExtensions(a));
+    @Value("${zimg.address}")
+    public void setPicServerAddress(String picServerAddress) {
+        MarkdownUtils.picServerAddress = picServerAddress;
     }
 }
