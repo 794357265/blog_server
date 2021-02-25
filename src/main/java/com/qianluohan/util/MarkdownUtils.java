@@ -24,7 +24,7 @@ import java.util.*;
 @Component
 public class MarkdownUtils {
 
-    private static String picServerAddress;
+//    private static String picServerAddress;
 
     /**
      * markdown格式转换成HTML格式
@@ -45,8 +45,8 @@ public class MarkdownUtils {
      * @return
      */
     public static String markdownToHtmlExtensions(String markdown) {
-        String picServerAddress = getPicServerAddress();
-        markdown = markdown.replaceAll("@@picAddress@@", picServerAddress);
+        /*String picServerAddress = getPicServerAddress();
+        markdown = markdown.replaceAll("@@picAddress@@", picServerAddress);*/
         //h标题生成id
         Set<Extension> headingAnchorExtensions = Collections.singleton(HeadingAnchorExtension.create());
         //转换table的HTML
@@ -83,12 +83,12 @@ public class MarkdownUtils {
         }
     }
 
-    public static String getPicServerAddress() {
-        return picServerAddress;
-    }
+//    public static String getPicServerAddress() {
+//        return picServerAddress;
+//    }
 
-    @Value("${zimg.address}")
-    public void setPicServerAddress(String picServerAddress) {
-        MarkdownUtils.picServerAddress = picServerAddress;
-    }
+//    @Value("${zimg.address}")
+//    public void setPicServerAddress(String picServerAddress) {
+//        MarkdownUtils.picServerAddress = picServerAddress;
+//    }
 }

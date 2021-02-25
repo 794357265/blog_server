@@ -7,4 +7,4 @@ spring:
 comment.avatar: /images/avatar.png
 
 zimg:
-  address: http://192.168.43.104:4869
+  address: http://localhost:4869

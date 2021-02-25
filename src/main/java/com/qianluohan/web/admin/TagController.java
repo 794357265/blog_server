@@ -50,7 +50,7 @@ public class TagController {
             result.rejectValue("name", "nameError", "该标签名称已存在");
         }
         if(result.hasErrors()){
-            return "/admin/tags-input";
+            return "admin/tags-input";
         }
         Tag t = tagService.saveTag(tag);
         if(t == null) {
@@ -58,7 +58,7 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "新增成功");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     @PostMapping("/tags/{id}")
@@ -68,7 +68,7 @@ public class TagController {
             result.rejectValue("name", "nameError", "该分类名称已存在");
         }
         if(result.hasErrors()){
-            return "/admin/tags-input";
+            return "admin/tags-input";
         }
         Tag t = tagService.updateTag(id, tag);
         if(t == null) {
@@ -76,14 +76,14 @@ public class TagController {
         } else {
             attributes.addFlashAttribute("message", "更新成功");
         }
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
     @GetMapping("/tags/{id}/delete")
     public String delete(@PathVariable Long id, RedirectAttributes attributes){
         tagService.deleteTag(id);
         attributes.addFlashAttribute("message", "删除成功");
-        return "redirect:/admin/tags";
+        return "redirect:admin/tags";
     }
 
 }
