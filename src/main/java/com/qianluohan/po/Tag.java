@@ -1,5 +1,7 @@
 package com.qianluohan.po;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Tag {
     private String name;
 
     @ManyToMany(mappedBy = "tags")
+    @Where(clause = "published = 1")
     private List<Blog> blogs = new ArrayList<>();
 
     public Tag() {

@@ -1,5 +1,6 @@
 package com.qianluohan.po;
 
+import org.hibernate.annotations.Where;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
@@ -20,6 +21,7 @@ public class Type {
     private String name;
 
     @OneToMany(mappedBy = "type")
+    @Where(clause = "published = 1")
     private List<Blog> blogs = new ArrayList<>();
 
     public Type() {
